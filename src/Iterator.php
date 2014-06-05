@@ -1,8 +1,12 @@
 <?php
 /**
- * Exception, element is not a Xinc_Project
- * 
- * @package   Xinc.Core
+ * Xinc - Continuous Integration.
+ * Iterator over an array of elements
+ *
+ * PHP version 5
+ *
+ * @category  Development
+ * @package   Xinc.Iterator
  * @author    Arno Schneider <username@example.com>
  * @copyright 2007 Arno Schneider, Barcelona
  * @license   http://www.gnu.org/copyleft/lgpl.html GNU/LGPL, see license.php
@@ -23,8 +27,63 @@
  * @link      http://code.google.com/p/xinc/
  */
 
-namespace Xinc\Core\Project;
+namespace Xinc\Core;
 
-class Exception extends \Exception
+class Iterator
 {
+    /**
+     * Internal array
+     *
+     * @var array
+     */
+    protected $array;
+    
+    /**
+     * Pointer for the current index
+     *
+     * @var integer
+     */
+    private $pointer = 0;
+    
+    /**
+     * size of the array
+     *
+     * @var integer
+     */
+    protected $size = 0;
+    
+    public function __construct($array = array())
+    {
+        $this->array = $array;
+        $this->size = count($this->array);
+    }
+    
+    public function add($item)
+    {
+        $this->array[] = $item;
+        $this->size++;
+    }
+    
+    public function hasNext()
+    {
+        return $this->pointer < $this->size;
+    }
+    
+    public function rewind()
+    {
+        $this->pointer = 0;
+    }
+
+    /**
+     * @return Xinc_Build_Interface
+     */
+    public function &next()
+    {
+        return $this->array[$this->pointer++];
+    }
+    
+    public function count()
+    {
+        return $this->size;
+    }
 }
