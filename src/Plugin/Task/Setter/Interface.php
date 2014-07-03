@@ -1,14 +1,15 @@
 <?php
 /**
  * Xinc - Continuous Integration.
- * Instance class
+ * Interface for plugin tasks that want to implement
+ * the listener for all "setValue"'s on the project tasks
  *
  * PHP version 5
  *
  * @category  Development
- * @package   Xinc.Core
- * @author    Arno Schneider <username@example.com>
- * @copyright 2014 Alexander Opitz, Leipzig
+ * @package   Xinc.Plugin.Task
+ * @author    Arno Schneider <username@example.org>
+ * @copyright 2007 Arno Schneider, Barcelona
  * @license   http://www.gnu.org/copyleft/lgpl.html GNU/LGPL, see license.php
  *            This file is part of Xinc.
  *            Xinc is free software; you can redistribute it and/or modify
@@ -27,44 +28,16 @@
  * @link      http://code.google.com/p/xinc/
  */
 
-namespace Xinc\Core;
-
-class Singleton
+interface Xinc_Plugin_Task_Setter_Interface
 {
-    /**
-     * @var array<Singleton> Instance of the singleton class.
-     */
-    protected static $instances = array();
-
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
-
-    protected function __wakeup()
-    {
-        throw news \Exception('You can\'t wakeup Singletons.');
-    }
 
     /**
-     * Get an instance of the Plugin Repository
+     * is called whenever a value is set on a task
      *
-     * @return \Xinc\Core\Singleton
+     * @param Xinc_Build_Interface $build
+     * @param string $value
+     *
+     * @return string modified $value
      */
-    public static function getInstance()
-    {
-        $class = get_called_class();
-        if (!isset(static::$instances[$class])) {
-            static::$instances[$class] = new static;
-        }
-        return static::$instances[$class];
-    }
-
-    public static function tearDown()
-    {
-        unset(static::$instances[$class]);
-    }
+    public function set(Xinc_Build_Interface $build, $value);
 }

@@ -1,14 +1,14 @@
 <?php
 /**
  * Xinc - Continuous Integration.
- * Instance class
+ * Definition of Plugin Slots
  *
  * PHP version 5
  *
  * @category  Development
- * @package   Xinc.Core
- * @author    Arno Schneider <username@example.com>
- * @copyright 2014 Alexander Opitz, Leipzig
+ * @package   Xinc.Plugin
+ * @author    Arno Schneider <username@example.org>
+ * @copyright 2007 Arno Schneider, Barcelona
  * @license   http://www.gnu.org/copyleft/lgpl.html GNU/LGPL, see license.php
  *            This file is part of Xinc.
  *            Xinc is free software; you can redistribute it and/or modify
@@ -27,44 +27,50 @@
  * @link      http://code.google.com/p/xinc/
  */
 
-namespace Xinc\Core;
-
-class Singleton
+class Xinc_Plugin_Slot
 {
     /**
-     * @var array<Singleton> Instance of the singleton class.
+     * Plugin is loaded when Xinc-Daemon starts running
      */
-    protected static $instances = array();
-
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
-
-    protected function __wakeup()
-    {
-        throw news \Exception('You can\'t wakeup Singletons.');
-    }
+    const GLOBAL_INIT = 0;
 
     /**
-     * Get an instance of the Plugin Repository
-     *
-     * @return \Xinc\Core\Singleton
+     * Plugin is loaded when Xinc Daemon starts running
+     * and listens globally on all events (across projects)
      */
-    public static function getInstance()
-    {
-        $class = get_called_class();
-        if (!isset(static::$instances[$class])) {
-            static::$instances[$class] = new static;
-        }
-        return static::$instances[$class];
-    }
+    const GLOBAL_LISTENER = 1;
 
-    public static function tearDown()
-    {
-        unset(static::$instances[$class]);
-    }
+    /**
+     * Plugin is run in any slot (listeners)
+     */
+    const PROJECT_LISTENER = 2;
+
+    /**
+     * Project is initialized when starting up Xinc daemon
+     */
+    const PROJECT_INIT = 3;
+
+    const PROJECT_SET_VALUES = 4;
+
+    /**
+     * Initiatoren Scheduler, Cron, ...
+     */
+    const INIT_PROCESS = 5;
+
+    /**
+     * First step, ModificiationSets, BootStrappers etc
+     */
+    const PRE_PROCESS = 10;
+
+    /**
+     * Builders
+     */
+    const PROCESS = 20;
+
+    /**
+     * Publishers
+     */
+    const POST_PROCESS = 30;
+
+    const SUBTASK = 40;
 }

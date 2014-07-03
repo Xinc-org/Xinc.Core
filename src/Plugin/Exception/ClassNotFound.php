@@ -1,14 +1,14 @@
 <?php
 /**
  * Xinc - Continuous Integration.
- * Instance class
+ * Exception, engine class was not found
  *
  * PHP version 5
  *
  * @category  Development
- * @package   Xinc.Core
- * @author    Arno Schneider <username@example.com>
- * @copyright 2014 Alexander Opitz, Leipzig
+ * @package   Xinc.Plugin.Exception
+ * @author    Arno Schneider <username@example.org>
+ * @copyright 2007 Arno Schneider, Barcelona
  * @license   http://www.gnu.org/copyleft/lgpl.html GNU/LGPL, see license.php
  *            This file is part of Xinc.
  *            Xinc is free software; you can redistribute it and/or modify
@@ -27,44 +27,19 @@
  * @link      http://code.google.com/p/xinc/
  */
 
-namespace Xinc\Core;
-
-class Singleton
+class Xinc_Plugin_Exception_ClassNotFound extends Exception
 {
     /**
-     * @var array<Singleton> Instance of the singleton class.
-     */
-    protected static $instances = array();
-
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
-
-    protected function __wakeup()
-    {
-        throw news \Exception('You can\'t wakeup Singletons.');
-    }
-
-    /**
-     * Get an instance of the Plugin Repository
+     * Constructor, generates an Exception Message.
      *
-     * @return \Xinc\Core\Singleton
+     * @param string $strPluginName Name of the plugin which misses the class.
+     * @param string $strFileName   Name of the file in which the class should
+     *                              have been.
      */
-    public static function getInstance()
+    public function __construct($strPluginName, $strFileName)
     {
-        $class = get_called_class();
-        if (!isset(static::$instances[$class])) {
-            static::$instances[$class] = new static;
-        }
-        return static::$instances[$class];
-    }
-
-    public static function tearDown()
-    {
-        unset(static::$instances[$class]);
+        parent::__construct(
+            'Plugin ' . $strPluginName . ': class not found in file: ' . $strFileName
+        );
     }
 }

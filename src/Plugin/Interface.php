@@ -1,14 +1,14 @@
 <?php
 /**
  * Xinc - Continuous Integration.
- * Instance class
+ * This interface represents a publishing mechanism to publish build results
  *
  * PHP version 5
  *
  * @category  Development
- * @package   Xinc.Core
- * @author    Arno Schneider <username@example.com>
- * @copyright 2014 Alexander Opitz, Leipzig
+ * @package   Xinc.Plugin
+ * @author    Arno Schneider <username@example.org>
+ * @copyright 2007 Arno Schneider, Barcelona
  * @license   http://www.gnu.org/copyleft/lgpl.html GNU/LGPL, see license.php
  *            This file is part of Xinc.
  *            Xinc is free software; you can redistribute it and/or modify
@@ -27,44 +27,33 @@
  * @link      http://code.google.com/p/xinc/
  */
 
-namespace Xinc\Core;
+require_once 'Xinc/Plugin/Exception.php';
 
-class Singleton
+interface Xinc_Plugin_Interface
 {
     /**
-     * @var array<Singleton> Instance of the singleton class.
+     *
+     * @return Xinc_Api_Module_Interface[]
      */
-    protected static $instances = array();
-
-    protected function __construct()
-    {
-    }
-
-    protected function __clone()
-    {
-    }
-
-    protected function __wakeup()
-    {
-        throw news \Exception('You can\'t wakeup Singletons.');
-    }
+    public function getApiModules();
 
     /**
-     * Get an instance of the Plugin Repository
      *
-     * @return \Xinc\Core\Singleton
+     * @return Xinc_Gui_Widget_Interface[]
      */
-    public static function getInstance()
-    {
-        $class = get_called_class();
-        if (!isset(static::$instances[$class])) {
-            static::$instances[$class] = new static;
-        }
-        return static::$instances[$class];
-    }
+    public function getGuiWidgets();
 
-    public static function tearDown()
-    {
-        unset(static::$instances[$class]);
-    }
+    /**
+     * Returns the defined tasks of the plugin
+     *
+     * @return Xinc_Plugin_Task[]
+     */
+    public function getTaskDefinitions();
+
+    /**
+     * Validate if the plugin can run properly on this system
+     *
+     * @return boolean True if plugin can run properly otherwise false.
+     */
+    public function validate();
 }
