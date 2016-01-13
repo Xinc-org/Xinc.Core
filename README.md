@@ -12,6 +12,12 @@ What is Xinc
 
 Xinc is a server system to manage continous integration and monitoring.
 
+What is Xinc.Core
+-----------------
+
+Xinc.Core includes the core parts which are needed for a Xinc.Server, other implementations or clients to be a server
+or to communicate with a server application. Mostly this will be Interfaces, Abstracts and Models.
+
 Xinc System Requirements
 ------------------------
 
