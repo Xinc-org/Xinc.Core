@@ -2,7 +2,7 @@
 /**
  * Exception, element is not an SimpleXMLElement
  * or is not of type project
- * 
+ *
  * @package   Xinc.Core
  * @author    Arno Schneider <username@example.com>
  * @copyright 2007 Arno Schneider, Barcelona

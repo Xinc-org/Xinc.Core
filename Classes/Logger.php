@@ -72,11 +72,11 @@ class Logger extends \Xinc\Core\Singleton
     /**
      * Log levels
      */
-    static $logLevelError = array(self::LOG_LEVEL_ERROR, 'error');
-    static $logLevelWarn = array(self::LOG_LEVEL_WARN, 'warn');
-    static $logLevelInfo = array(self::LOG_LEVEL_INFO, 'info');
-    static $logLevelDebug = array(self::LOG_LEVEL_DEBUG, 'debug');
-    static $logLevelVerbose = array(self::LOG_LEVEL_VERBOSE, 'verbose');
+    public static $logLevelError = array(self::LOG_LEVEL_ERROR, 'error');
+    public static $logLevelWarn = array(self::LOG_LEVEL_WARN, 'warn');
+    public static $logLevelInfo = array(self::LOG_LEVEL_INFO, 'info');
+    public static $logLevelDebug = array(self::LOG_LEVEL_DEBUG, 'debug');
+    public static $logLevelVerbose = array(self::LOG_LEVEL_VERBOSE, 'verbose');
 
 
     private $logLevelSet = false;

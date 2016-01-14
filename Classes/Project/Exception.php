@@ -1,7 +1,7 @@
 <?php
 /**
  * Exception, element is not a Xinc_Project
- * 
+ *
  * @package   Xinc.Core
  * @author    Arno Schneider <username@example.com>
  * @copyright 2007 Arno Schneider, Barcelona

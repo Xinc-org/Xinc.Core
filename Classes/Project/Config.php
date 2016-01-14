@@ -76,7 +76,9 @@ class Config
                     $project->$method((string)$value);
                 } else {
                     \Xinc\Core\Logger::getInstance()->error(
-                        'Trying to set "' . $name .'" on Xinc Project "' . $project->getName() . '" failed. No such setter.'
+                        'Trying to set "' . $name
+                        . '" on Xinc Project "' . $project->getName()
+                        . '" failed. No such setter.'
                     );
                 }
             }
