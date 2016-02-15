@@ -52,10 +52,10 @@ class Repository extends \Xinc\Core\Singleton
     /**
      * Load the plugin config, which is handled by composer xinc package installer.
      */
-    public function loadPluginConfig()
+    public function loadPluginConfig($workingDirectory)
     {
         // @TODO Only load active packages.
-        $packagePersistence = new \Xinc\Packager\Persistence();
+        $packagePersistence = new \Xinc\Packager\Persistence($workingDirectory);
         $packages = $packagePersistence->getPackagesAsClass();
 
         // @var $package \Xinc\Packager\Models\Package
