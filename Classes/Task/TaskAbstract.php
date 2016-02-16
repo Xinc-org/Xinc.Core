@@ -28,7 +28,7 @@
 
 namespace Xinc\Core\Task;
 
-abstract class TaskAbstract extends \Xinc\Core\Registry\RegistryAbstract implements TaskInterface
+abstract class TaskAbstract implements TaskInterface
 {
     /**
      * @var Xinc_Plugin_Interface

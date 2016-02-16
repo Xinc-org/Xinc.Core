@@ -28,7 +28,7 @@
 
 namespace Xinc\Core\Task;
 
-interface TaskInterface extends \Xinc\Core\Registry\RegistryInterface
+interface TaskInterface
 {
     /**
      * Constructor
