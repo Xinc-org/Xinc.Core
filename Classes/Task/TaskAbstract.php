@@ -135,4 +135,16 @@ abstract class TaskAbstract implements TaskInterface
     {
         return in_array($value, array('true', '1', 'yes')) ? true : false;
     }
+
+    public function __sleep()
+    {
+        $this->xml = $this->xml->asXML();
+        return array('plugin', 'xml', 'pluginSlot', 'name');
+    }
+
+    public function __wakeup()
+    {
+        $this->xml = simplexml_load_string($this->xml);
+    }
+
 }

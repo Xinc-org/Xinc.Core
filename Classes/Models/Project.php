@@ -46,13 +46,15 @@ class Project
      * @see Xinc\Core\Project\Status
      * @var integer Current status of the project
      */
-    private $status = \Xinc\Core\Project\Status::NEVERRUN;
+    private $status = \Xinc\Core\Project\Status::ENABLED;
 
     /**
      * @see Xinc\Core\Plugin\Slot
      * @var array Used Processes
      */
     private $processes = array();
+
+    private $jobs = array();
 
     /**
      * @var Xinc\Core\Models\ProjectGroup The group this project belongs
@@ -150,6 +152,20 @@ class Project
         $this->processes[$slot][] = $process;
     }
 
+    public function getProcessBySlot($slot)
+    {
+        if (isset($this->processes[$slot])) {
+            return $this->processes[$slot];
+        }
+
+        return array();
+    }
+
+    public function getLastJob()
+    {
+        return null;
+    }
+
     public function setConfig($config)
     {
         $this->config = $config;
@@ -158,5 +174,16 @@ class Project
     public function getConfig()
     {
         return $this->config;
+    }
+
+    public function __sleep()
+    {
+        $this->config = $this->config->asXML();
+        return array('name', 'engineName', 'status', 'processes', 'jobs', 'group', 'config');
+    }
+
+    public function __wakeup()
+    {
+        $this->config = simplexml_load_string($this->config);
     }
 }
