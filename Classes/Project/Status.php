@@ -31,9 +31,8 @@ namespace Xinc\Core\Project;
 
 class Status
 {
-    const ENABLED = 1;
-    const DISABLED = 0;
     const MISCONFIGURED = -1;
+    const DISABLED = 0;
+    const ENABLED = 1;
     const BUILDING = 2;
-    const NEVERRUN = 3;
 }
